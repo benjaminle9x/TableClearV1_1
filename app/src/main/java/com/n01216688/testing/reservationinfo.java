@@ -20,9 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class reservationinfo extends AppCompatActivity {
 
     Button reservation;
-    FirebaseDatabase database;
-    DatabaseReference myref;
-    DataStructure mData;
+    FirebaseDatabase database, database2;
+    DatabaseReference myref, myref2;
+    DataStructure_ReservationInfo mData;
     EditText name, phone;
 
 
@@ -30,18 +30,17 @@ public class reservationinfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationinfo);
-        NumberPicker year = (NumberPicker) findViewById(R.id.picker1);
+        final NumberPicker tableno = (NumberPicker) findViewById(R.id.picker7);
         NumberPicker month = (NumberPicker) findViewById(R.id.picker2);
         NumberPicker day = (NumberPicker) findViewById(R.id.picker3);
         NumberPicker hour = (NumberPicker) findViewById(R.id.picker4);
         NumberPicker min = (NumberPicker) findViewById(R.id.picker5);
-        NumberPicker howMany = (NumberPicker) findViewById(R.id.picker6);
+        final NumberPicker howMany = (NumberPicker) findViewById(R.id.picker6);
         name = (EditText) findViewById(R.id.reName);
         phone = (EditText) findViewById(R.id.rePhone);
+        Button book = (Button) findViewById(R.id.Book);
 
-        year.setMinValue(2019);
-        year.setMaxValue(2025);
-        year.setWrapSelectorWheel(false);
+        getSupportActionBar().setTitle("Reservation Page");
 
         month.setMinValue(0);
 
@@ -61,26 +60,73 @@ public class reservationinfo extends AppCompatActivity {
 
 
         hour.setMinValue(0);
-        hour.setMaxValue(11);
+        hour.setMaxValue(23);
         hour.setDisplayedValues(new String[]{
 
-                "11", "12", "1", "2", "3", "4", "5",
+               "0", "1", "2", "3", "4", "5", "6", "7",
 
-                "6", "7", "8", "9", "10"});
+                "8", "9", "10", "11", "12", "13", "14",
+
+                "15", "16", "17", "18", "19", "20", "21", "22", "23" });
         hour.setWrapSelectorWheel(false);
 
 
-        min.setMinValue(0);
-        min.setMaxValue(1);
-        min.setDisplayedValues(new String[]{"00", "30"});
+        min.setMinValue(00);
+        min.setMaxValue(59);
+        min.setWrapSelectorWheel(false);
 
         howMany.setMinValue(0);
         howMany.setMaxValue(4);
         howMany.setDisplayedValues(new String[]{"1", "2", "3", "4", "more than 4"});
         howMany.setWrapSelectorWheel(false);
+
+        tableno.setMinValue(0);
+        tableno.setMaxValue(100);
+        tableno.setWrapSelectorWheel(false);
+
+        final String realdate = String.valueOf(month) + "/" + String.valueOf(day);
+        final String realtime = String.valueOf(hour) + ":" + String.valueOf(min);
+
+        getDatabase();
+
+        book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                writeData(name.getText(), phone.getText(), String.valueOf(realdate), String.valueOf(realtime), String.valueOf(howMany), String.valueOf(tableno));
+            }
+        });
+    }
+
+    private void getDatabase() {
+        database = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        String path = "reservationdata/";
+        myref = database.getReference(path);
     }
 
 
 
+    private void writeData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable){
+        DataStructure_ReservationInfo mData = createData(cname,cphone,cdate,ctime,csize,ctable);
+        myref.push().setValue(mData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(getApplicationContext(), "Table has been booked", Toast.LENGTH_LONG).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Booking failed", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private DataStructure_ReservationInfo createData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable){
+        return new DataStructure_ReservationInfo(String.valueOf(cname)
+        , String.valueOf(cphone), String.valueOf(cdate),
+                String.valueOf(ctime), String.valueOf(csize),
+                String.valueOf(ctable));
+    }
 }
 

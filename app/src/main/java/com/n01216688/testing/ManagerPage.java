@@ -12,16 +12,22 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ManagerPage extends AppCompatActivity {
+    FirebaseDatabase database;
+    DatabaseReference myref;
+    DataStructure_ReservationInfo mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_page);
 
-
         getSupportActionBar().setTitle("Manager Page");
+
+        getDatabase();
     }
 
     @Override
@@ -80,5 +86,12 @@ public class ManagerPage extends AppCompatActivity {
     public void openMainActivity(){
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
+    }
+
+    private void getDatabase(){
+        database = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        String path = "reservationdata/" + mAuth.getUid();
+        myref = database.getReference(path);
     }
 }
