@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.n01216688.testing">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.Launcher">
+        <activity android:name=".reservationinfo"></activity>
+        <activity android:name=".NewActivity" />
+        <activity android:name=".AddRestaurant" />
+        <activity
+            android:name=".ManagerPage"
+            android:parentActivityName=".CustomerPage" />
+        <activity
+            android:name=".ProfileScreen1"
+            android:parentActivityName=".SettingScreen" />
+        <activity
+            android:name=".NotificationScreen"
+            android:parentActivityName=".SettingScreen" />
+        <activity
+            android:name=".NewPassword1"
+            android:parentActivityName=".ProfileScreen1" />
+        <activity
+            android:name=".LanguageScreen"
+            android:parentActivityName=".SettingScreen" />
+        <activity
+            android:name=".SettingScreen"
+            android:parentActivityName=".CustomerPage" />
+        <activity android:name=".ModifyProfile" />
+        <activity
+            android:name=".checkProfile"
+            android:parentActivityName=".CustomerPage" />
+        <activity android:name=".RegisterPage" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CustomerPage" />
+    </application>
+
+</manifest>
