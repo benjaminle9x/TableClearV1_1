@@ -12,6 +12,6 @@
         </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$/Downloads/Table-Clear-master-5" />
+    <option name="cloneParentDir" value="$USER_HOME$/Downloads" />
   </component>
 </application>
