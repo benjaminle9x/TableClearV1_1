@@ -31,10 +31,10 @@ public class reservationinfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservationinfo);
         final NumberPicker tableno = (NumberPicker) findViewById(R.id.picker7);
-        NumberPicker month = (NumberPicker) findViewById(R.id.picker2);
-        NumberPicker day = (NumberPicker) findViewById(R.id.picker3);
-        NumberPicker hour = (NumberPicker) findViewById(R.id.picker4);
-        NumberPicker min = (NumberPicker) findViewById(R.id.picker5);
+        final NumberPicker month = (NumberPicker) findViewById(R.id.picker2);
+        final NumberPicker day = (NumberPicker) findViewById(R.id.picker3);
+        final NumberPicker hour = (NumberPicker) findViewById(R.id.picker4);
+        final NumberPicker min = (NumberPicker) findViewById(R.id.picker5);
         final NumberPicker howMany = (NumberPicker) findViewById(R.id.picker6);
         name = (EditText) findViewById(R.id.reName);
         phone = (EditText) findViewById(R.id.rePhone);
@@ -42,15 +42,15 @@ public class reservationinfo extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Reservation Page");
 
-        month.setMinValue(0);
+        month.setMinValue(1);
 
-        month.setMaxValue(11);
+        month.setMaxValue(12);
 
         month.setDisplayedValues(new String[]{
 
-                "Jan", "Feb", "Mar", "Apr", "May", "June",
+                "1", "2", "3", "4", "5", "6",
 
-                "July", "Aug", "Sep", "Oct", "Nov", "Dec"});
+                "7", "8", "9", "10", "11", "12"});
         month.setWrapSelectorWheel(false);
 
 
@@ -75,24 +75,24 @@ public class reservationinfo extends AppCompatActivity {
         min.setMaxValue(59);
         min.setWrapSelectorWheel(false);
 
-        howMany.setMinValue(0);
-        howMany.setMaxValue(4);
-        howMany.setDisplayedValues(new String[]{"1", "2", "3", "4", "more than 4"});
+        howMany.setMinValue(1);
+        howMany.setMaxValue(5);
+        howMany.setDisplayedValues(new String[]{"1", "2", "3", "4", "5"});
         howMany.setWrapSelectorWheel(false);
 
-        tableno.setMinValue(0);
+        tableno.setMinValue(1);
         tableno.setMaxValue(100);
         tableno.setWrapSelectorWheel(false);
 
-        final String realdate = String.valueOf(month) + "/" + String.valueOf(day);
-        final String realtime = String.valueOf(hour) + ":" + String.valueOf(min);
-
         getDatabase();
+        
 
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeData(name.getText(), phone.getText(), String.valueOf(realdate), String.valueOf(realtime), String.valueOf(howMany), String.valueOf(tableno));
+                writeData(name.getText(), phone.getText(), month.getValue() + "/" + day.getValue(),
+                        Integer.toString(hour.getValue()) + ":" + Integer.toString(min.getValue()),
+                        Integer.toString(howMany.getValue()), Integer.toString(tableno.getValue()));
             }
         });
     }
@@ -127,6 +127,13 @@ public class reservationinfo extends AppCompatActivity {
         , String.valueOf(cphone), String.valueOf(cdate),
                 String.valueOf(ctime), String.valueOf(csize),
                 String.valueOf(ctable));
+    }
+
+    private void getDatabase2() {
+        database2 = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth2 = FirebaseAuth.getInstance();
+        String path = "restaurantdata/";
+        myref2 = database2.getReference(path);
     }
 }
 
