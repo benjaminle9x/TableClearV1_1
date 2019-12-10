@@ -8,19 +8,27 @@ public class DataStructure_ReservationInfo {
     private String cus_time;
     private String cus_size;
     private String cus_table;
+    private String res_name;
 
     public DataStructure_ReservationInfo(){
 
     }
 
-    public DataStructure_ReservationInfo(String cus_name, String cus_number, String cus_date, String cus_time, String cus_size, String cus_table) {
+    public DataStructure_ReservationInfo(String cus_name, String cus_number, String cus_date, String cus_time, String cus_size, String cus_table, String res_name) {
         this.cus_name = cus_name;
         this.cus_number = cus_number;
         this.cus_date = cus_date;
         this.cus_time = cus_time;
         this.cus_size = cus_size;
         this.cus_table = cus_table;
+        this.res_name = res_name;
     }
+
+    public void setRes_name(String res_name) {
+        this.res_name = res_name;
+    }
+
+    public String getRes_name() { return res_name;}
 
     public String getCus_name() {
         return cus_name;

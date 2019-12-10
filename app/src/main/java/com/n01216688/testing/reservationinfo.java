@@ -1,6 +1,7 @@
 package com.n01216688.testing;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,16 +15,18 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class reservationinfo extends AppCompatActivity {
 
-    Button reservation;
     FirebaseDatabase database, database2;
     DatabaseReference myref, myref2;
     DataStructure_ReservationInfo mData;
-    EditText name, phone;
+    EditText name, phone, rname;
 
 
     @Override
@@ -38,6 +41,7 @@ public class reservationinfo extends AppCompatActivity {
         final NumberPicker howMany = (NumberPicker) findViewById(R.id.picker6);
         name = (EditText) findViewById(R.id.reName);
         phone = (EditText) findViewById(R.id.rePhone);
+        rname = (EditText) findViewById(R.id.reRes);
         Button book = (Button) findViewById(R.id.Book);
 
         getSupportActionBar().setTitle("Reservation Page");
@@ -86,13 +90,12 @@ public class reservationinfo extends AppCompatActivity {
 
         getDatabase();
         
-
         book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 writeData(name.getText(), phone.getText(), month.getValue() + "/" + day.getValue(),
                         Integer.toString(hour.getValue()) + ":" + Integer.toString(min.getValue()),
-                        Integer.toString(howMany.getValue()), Integer.toString(tableno.getValue()));
+                        Integer.toString(howMany.getValue()), Integer.toString(tableno.getValue()), rname.getText());
             }
         });
     }
@@ -107,8 +110,8 @@ public class reservationinfo extends AppCompatActivity {
 
 
 
-    private void writeData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable){
-        DataStructure_ReservationInfo mData = createData(cname,cphone,cdate,ctime,csize,ctable);
+    private void writeData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable, Editable rname){
+        DataStructure_ReservationInfo mData = createData(cname,cphone,cdate,ctime,csize,ctable,rname);
         myref.push().setValue(mData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -122,18 +125,12 @@ public class reservationinfo extends AppCompatActivity {
         });
     }
 
-    private DataStructure_ReservationInfo createData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable){
+    private DataStructure_ReservationInfo createData(Editable cname, Editable cphone, String cdate, String ctime, String csize, String ctable, Editable rname){
         return new DataStructure_ReservationInfo(String.valueOf(cname)
         , String.valueOf(cphone), String.valueOf(cdate),
                 String.valueOf(ctime), String.valueOf(csize),
-                String.valueOf(ctable));
+                String.valueOf(ctable), String.valueOf(rname));
     }
 
-    private void getDatabase2() {
-        database2 = FirebaseDatabase.getInstance();
-        FirebaseAuth mAuth2 = FirebaseAuth.getInstance();
-        String path = "restaurantdata/";
-        myref2 = database2.getReference(path);
-    }
 }
 

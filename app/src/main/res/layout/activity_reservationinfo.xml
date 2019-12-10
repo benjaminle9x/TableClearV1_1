@@ -24,7 +24,7 @@
         android:layout_below="@+id/title_1"
         android:text="Customer Name"
         android:textSize="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -35,7 +35,7 @@
         android:text="Mobile No"
         android:textSize="20dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="15dp"/>
 
     <TextView
         android:id="@+id/Date"
@@ -44,7 +44,7 @@
         android:layout_below="@+id/Phone"
         android:text="Date"
         android:textSize="20dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -72,7 +72,7 @@
         android:layout_below="@+id/Date"
         android:text="Time"
         android:textSize="20dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="60dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -101,7 +101,7 @@
         android:layout_below="@+id/Time"
         android:text="Party Size"
         android:textSize="20dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="15dp"/>
 
     <TextView
@@ -111,7 +111,17 @@
         android:text="Table No"
         android:textSize="20dp"
         android:layout_below="@id/PartySize"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:id="@+id/RestaurantName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restaurant"
+        android:textSize="20dp"
+        android:layout_below="@id/TableNo"
+        android:layout_marginTop="50dp"
         android:layout_marginLeft="15dp"/>
 
     <EditText
@@ -120,7 +130,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_1"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="3dp"
         android:layout_toRightOf="@+id/Name"
         android:textSize="15dp" />
 
@@ -131,14 +141,23 @@
         android:layout_below="@+id/reName"
         android:layout_toRightOf="@id/Phone"
         android:layout_marginLeft="67dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="5dp"/>
+
+    <EditText
+        android:id="@+id/reRes"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/RestaurantName"
+        android:layout_marginLeft="67dp"
+        android:layout_marginTop="480dp"/>
+
 
     <NumberPicker
         android:id="@+id/picker2"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_marginLeft="148dp"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="130dp"
         android:layout_toRightOf="@id/Date" />
 
     <NumberPicker
@@ -146,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_toRightOf="@+id/picker2"
-        android:layout_marginTop="165dp"
+        android:layout_marginTop="130dp"
         android:layout_marginLeft="20dp"/>
 
     <NumberPicker
@@ -154,7 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_toRightOf="@+id/Time"
-        android:layout_marginTop="265dp"
+        android:layout_marginTop="215dp"
         android:layout_marginLeft="146dp"/>
 
     <NumberPicker
@@ -162,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:layout_toRightOf="@id/picker4"
-        android:layout_marginTop="265dp"
+        android:layout_marginTop="215dp"
         android:layout_marginLeft="20dp"/>
 
     <NumberPicker
@@ -171,7 +190,7 @@
         android:layout_height="70dp"
         android:layout_below="@+id/Hour"
         android:layout_marginLeft="250dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="8dp"/>
 
     <NumberPicker
         android:id="@+id/picker7"
@@ -179,14 +198,14 @@
         android:layout_height="70dp"
         android:layout_below="@+id/picker6"
         android:layout_marginLeft="250dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="5dp"/>
 
     <Button
         android:id="@+id/Book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/TableNo"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="115dp"
         android:layout_centerHorizontal="true"
         android:text="Book a Table"/>
 
